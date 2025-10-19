@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">F1 Pit Stop</string>
+    <string name="piloto">Piloto</string>
+    <string name="escuderia">Escudería</string>
+    <string name="tiempo_total">Tiempo Total (s)</string>
+    <string name="cambio_neumaticos">Cambio de Neumáticos</string>
+    <string name="numero_neumaticos">Número de Neumáticos Cambiados</string>
+    <string name="estado">Estado</string>
+    <string name="motivo_fallo">Motivo del Fallo</string>
+    <string name="mecanico_principal">Mecánico Principal</string>
+    <string name="fecha_hora">Fecha y Hora del Pit Stop</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="buscar">Buscar</string>
+    <string name="registrar_pit_stop">Registrar Pit Stop</string>
+    <string name="ver_listado">Ver Listado</string>
+    <string name="resumen_pit_stops">Resumen de Pit Stops</string>
+    <string name="listado_pit_stops">Listado de Pit Stops</string>
+</resources>
