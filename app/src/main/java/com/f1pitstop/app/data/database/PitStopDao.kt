@@ -71,29 +71,29 @@ interface PitStopDao {
      * Obtiene el tiempo más rápido de pit stops exitosos
      * @return Tiempo más rápido o null si no hay pit stops exitosos
      */
-    @Query("SELECT MIN(tiempo_total) FROM pit_stops WHERE estado = 'OK'")
-    suspend fun getFastestTime(): Double?
+    @Query("SELECT * FROM pit_stops WHERE estado = 'OK' ORDER BY tiempo_total ASC LIMIT 1")
+    fun getFastestPitStop(): Flow<PitStop?>
     
     /**
      * Obtiene el promedio de tiempos de pit stops exitosos
      * @return Promedio de tiempos o null si no hay pit stops exitosos
      */
-    @Query("SELECT AVG(tiempo_total) FROM pit_stops WHERE estado = 'OK'")
-    suspend fun getAverageTime(): Double?
+    Query("SELECT AVG(tiempo_total) FROM pit_stops WHERE estado = 'OK'")
+    fun getAverageTime(): Flow<Double?>
     
     /**
      * Obtiene el total de pit stops registrados
      * @return Número total de pit stops
      */
     @Query("SELECT COUNT(*) FROM pit_stops")
-    suspend fun getTotalCount(): Int
+    fun getTotalCount(): Flow<Int>
     
     /**
      * Obtiene los últimos 5 pit stops para el gráfico
      * @return Lista con los últimos 5 pit stops
      */
-    @Query("SELECT * FROM pit_stops ORDER BY fecha_hora DESC LIMIT 5")
-    suspend fun getLastFivePitStops(): List<PitStop>
+    @Query("SELECT * FROM pit_stops ORDER BY fecha_hora DESC LIMIT :limit")
+    fun getLastNPitStops(limit: Int): Flow<List<PitStop>>
     
     /**
      * Obtiene pit stops por escudería

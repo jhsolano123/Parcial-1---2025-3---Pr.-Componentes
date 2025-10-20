@@ -71,6 +71,9 @@ dependencies {
     
     // Navigation
     implementation 'androidx.navigation:navigation-compose:2.7.6'
+
+    //  Y-Charts (para gráficos en Compose)
+    implementation 'co.yml:ycharts:2.1.0'
     
     // Testing dependencies
     testImplementation 'junit:junit:4.13.2'

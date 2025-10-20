@@ -28,6 +28,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    // Obtener el repositorio de la clase Application
+                    val application = application as PitStopApplication
+                    val repository = application.repository
+
+                    // Crear el ViewModel usando el Factory
+                    val summaryViewModel: SummaryViewModel = viewModel(factory = SummaryViewModel.Factory(repository))
+
+                    SummaryScreen(summaryViewModel)
                     Greeting("F1 Pit Stop App")
                 }
             }
