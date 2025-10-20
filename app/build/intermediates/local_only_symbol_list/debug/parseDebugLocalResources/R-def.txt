@@ -1,0 +1,26 @@
+R_DEF: Internal format may change without notice
+local
+drawable ic_launcher_background
+mipmap ic_launcher
+mipmap ic_launcher_foreground
+mipmap ic_launcher_round
+string app_name
+string buscar
+string cambio_neumaticos
+string cancelar
+string escuderia
+string estado
+string fecha_hora
+string guardar
+string listado_pit_stops
+string mecanico_principal
+string motivo_fallo
+string numero_neumaticos
+string piloto
+string registrar_pit_stop
+string resumen_pit_stops
+string tiempo_total
+string ver_listado
+style Theme.F1PitStop
+xml backup_rules
+xml data_extraction_rules
