@@ -1,0 +1,57 @@
+# --- Android / Gradle ---
+.gradle/
+**/build/
+**/.gradle/
+
+# IDE
+.idea/
+*.iml
+out/
+
+# Local config
+local.properties
+
+# KSP / generated
+**/ksp/
+**/generated/
+**/intermediates/
+**/outputs/
+**/tmp/
+**/.kotlin/
+**/.kotlinc/
+
+# Binarios / artefactos
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.jar
+*.aar
+*.so
+
+# Tests / reports
+androidTest-results/
+test-results/
+reports/
+captures/
+
+# NDK
+.externalNativeBuild/
+.cxx/
+
+# Claves (NO subir)
+*.jks
+*.keystore
+keystore.properties
+
+# Misceláneo
+*.log
+*.orig
+*.rej
+*.tmp
+*.temp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
