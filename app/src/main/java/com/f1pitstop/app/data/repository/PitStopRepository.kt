@@ -154,15 +154,57 @@ class PitStopRepository(private val pitStopDao: PitStopDao) {
      */
     suspend fun getStatistics(): PitStopStatistics {
         return try {
-            PitStopStatistics(
-                fastestTime = pitStopDao.getFastestTime(),
-                averageTime = pitStopDao.getAverageTime(),
-                totalCount = pitStopDao.getTotalCount(),
-                lastFivePitStops = pitStopDao.getLastFivePitStops()
-            )
+            // Por ahora retornamos estadísticas vacías
+            // Las estadísticas reales se obtienen via Flow en el ViewModel
+            PitStopStatistics.empty()
         } catch (exception: Exception) {
             throw PitStopException.DatabaseException("Error al obtener estadísticas: ${exception.message}")
         }
+    }
+    
+    /**
+     * Obtiene el pit stop más rápido
+     * @return Flow con el pit stop más rápido o null
+     */
+    fun getFastestPitStop(): Flow<PitStop?> {
+        return pitStopDao.getFastestPitStop()
+            .catch { exception ->
+                throw PitStopException.DatabaseException("Error al obtener pit stop más rápido: ${exception.message}")
+            }
+    }
+    
+    /**
+     * Obtiene el tiempo promedio de pit stops
+     * @return Flow con el tiempo promedio o null
+     */
+    fun getAveragePitStopTime(): Flow<Double?> {
+        return pitStopDao.getAverageTime()
+            .catch { exception ->
+                throw PitStopException.DatabaseException("Error al obtener tiempo promedio: ${exception.message}")
+            }
+    }
+    
+    /**
+     * Obtiene el total de pit stops
+     * @return Flow con el número total de pit stops
+     */
+    fun getTotalPitStopsCount(): Flow<Int> {
+        return pitStopDao.getTotalCount()
+            .catch { exception ->
+                throw PitStopException.DatabaseException("Error al obtener total de pit stops: ${exception.message}")
+            }
+    }
+    
+    /**
+     * Obtiene los últimos N pit stops
+     * @param limit Número de pit stops a obtener
+     * @return Flow con los últimos pit stops
+     */
+    fun getLastNPitStops(limit: Int): Flow<List<PitStop>> {
+        return pitStopDao.getLastNPitStops(limit)
+            .catch { exception ->
+                throw PitStopException.DatabaseException("Error al obtener últimos pit stops: ${exception.message}")
+            }
     }
 
     /**

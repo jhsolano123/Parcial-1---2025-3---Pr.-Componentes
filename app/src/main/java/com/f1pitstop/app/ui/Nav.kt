@@ -2,12 +2,16 @@
 package com.f1pitstop.app.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
+import com.f1pitstop.app.PitStopApplication
 import com.f1pitstop.app.ui.edit.EditPitStopScreen
 import com.f1pitstop.app.ui.list.PitStopListScreen
 import com.f1pitstop.app.ui.summary.SummaryScreen
+import com.f1pitstop.app.ui.summary.SummaryViewModel
 
 object Routes {
     const val SUMMARY = "summary"
@@ -19,11 +23,19 @@ object Routes {
 @Composable
 fun AppNav() {
     val nav = rememberNavController()
+    val context = LocalContext.current
+    val application = context.applicationContext as PitStopApplication
+    val repository = application.repository
+    
     NavHost(navController = nav, startDestination = Routes.SUMMARY) {
         composable(Routes.SUMMARY) {
+            val summaryViewModel: SummaryViewModel = viewModel(
+                factory = SummaryViewModel.Factory(repository)
+            )
             SummaryScreen(
                 onNew = { nav.navigate(Routes.EDIT) },
-                onList = { nav.navigate(Routes.LIST) }
+                onList = { nav.navigate(Routes.LIST) },
+                viewModel = summaryViewModel
             )
         }
         composable(Routes.LIST) {
