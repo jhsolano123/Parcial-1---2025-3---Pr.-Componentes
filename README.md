@@ -278,5 +278,5 @@ Para completar la aplicación, los otros módulos deben:
 **Desarrollado por**: 
 Persona 1 - Backend y Persistencia  
 Persona 3 – interfaz y Datos estadisticos
-**Puntos obtenidos**: 1.5 (Guardar pit stop: 1.0 + Pruebas unitarias: 0.5)  
+**Puntos obtenidos**: 1.7 (Guardar pit stop: 1.0 + Pruebas unitarias: 0.5)  
 **Fecha**: Octubre 2024
