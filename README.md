@@ -1,13 +1,24 @@
 # F1 Pit Stop App - Módulo de Datos (Persona 1)
 
+Aplicación Android desarrollada en Kotlin para registrar, visualizar y analizar pit stops de Fórmula 1.  
+Combina una arquitectura **MVVM (Model–View–ViewModel)** con **Jetpack Compose** para la interfaz de usuario, **Room** para la persistencia local de datos y **Y-Charts** para la visualización de estadísticas gráficas.
+
 ## Descripción del Proyecto
 
-Aplicación Android para registrar y gestionar pit stops de Fórmula 1. Este módulo implementa toda la capa de datos, persistencia y lógica de negocio del backend.
+El proyecto permite:
+- Registrar pit stops con validación completa de los datos.
+- Consultar y filtrar registros de pit stops almacenados localmente.
+- Obtener estadísticas de rendimiento (tiempo promedio, pit stop más rápido, total de registros, etc.).
+- Visualizar los resultados mediante gráficos interactivos con Compose.
+
+Está diseñado con un enfoque modular y escalable, priorizando la mantenibilidad, el testing y la integración entre capas.
+
 
 ## Arquitectura Implementada
 
 ### Patrón MVVM + Repository
 - **Model**: Entidades de datos (PitStop, enums)
+- **ViewModel:** Gestiona la lógica de presentación y comunica la UI con el Repository.
 - **Repository**: Abstrae el acceso a datos y maneja la lógica de negocio
 - **Database**: Room Database para persistencia local
 
@@ -15,12 +26,17 @@ Aplicación Android para registrar y gestionar pit stops de Fórmula 1. Este mó
 ```
 com.f1pitstop.app/
 ├── data/
-│   ├── database/          # Room Database, DAO, Converters
-│   ├── model/            # Entidades y modelos de datos
-│   ├── repository/       # Repository pattern
-│   └── exception/        # Excepciones personalizadas
-├── utils/                # Utilidades y factories
-└── PitStopApplication    # Application class
+│ ├── database/ # Room Database, DAO, Converters
+│ ├── model/ # Entidades y modelos de datos
+│ ├── repository/ # Repository Pattern y lógica de negocio
+│ └── exception/ # Excepciones personalizadas
+├── ui/
+│ ├── summary/ # Pantalla de resumen con Compose y gráficos
+│ ├── components/ # Componentes reutilizables de la UI
+│ └── theme/ # Temas y estilos visuales
+├── utils/ # Utilidades y factories de validación/datos
+├── PitStopApplication.kt # Inicialización global del Repository y DB
+└── MainActivity.kt # Actividad principal y navegación
 ```
 
 ## Funcionalidades Implementadas
@@ -36,6 +52,50 @@ com.f1pitstop.app/
 - Tests unitarios para Repository (20+ tests)
 - Tests de integración (8+ tests)
 - Cobertura completa de validaciones y casos edge
+
+
+#### Justificación Técnica
+
+### Arquitectura MVVM
+- Separación de responsabilidades: desacopla la lógica de negocio de la UI.  
+- Reactividad total: mediante `Flow`, la UI se actualiza automáticamente ante cambios en los datos.  
+- Testeabilidad: permite realizar pruebas unitarias del ViewModel y Repository sin depender de la UI.  
+- Ciclo de vida gestionado: los ViewModels sobreviven a cambios de configuración, evitando pérdida de datos.
+
+
+### Persistencia con Room Database
+- Abstracción de SQLite: facilita el trabajo con entidades, DAOs y migraciones.
+- Seguridad en tiempo de compilación: verifica las consultas SQL.
+- Compatibilidad con Coroutines y Flow: soporte asíncrono nativo.
+- Manejo de migraciones: mantiene la integridad del esquema de la base de datos. 
+
+---
+
+### Interfaz de Usuario con Jetpack Compose
+- Declarativa: simplifica el desarrollo al describir el estado visual sin XML.  
+- Menos código, más legibilidad: las funciones composables son reutilizables.  
+- Reactividad nativa: integración directa con `StateFlow` y `LiveData`.  
+- Alta productividad: vista previa en tiempo real desde Android Studio.
+
+---
+
+### Visualización de Datos con Y-Charts
+- Librería optimizada para Jetpack Compose, usada para mostrar los tiempos de pit stops.  
+- Ofrece gráficos de barras personalizados con colores, animaciones y escalas dinámicas.  
+- Ideal para representar los resultados recientes o las estadísticas generales del piloto o escudería.
+
+Referencia:  
+[Y-Charts for Jetpack Compose](https://github.com/codeandtheory/YCharts)
+
+---
+
+### Kotlin Coroutines y Flow
+- Asincronía simplificada: operaciones sin bloqueo del hilo principal.  
+- Gestión eficiente: uso de `suspend functions` para inserciones, lecturas y actualizaciones.  
+- Reactividad: `Flow<List<PitStop>>` emite cambios en tiempo real hacia la UI.
+
+---
+
 
 ## Componentes Principales
 
@@ -215,6 +275,8 @@ Para completar la aplicación, los otros módulos deben:
 
 ---
 
-**Desarrollado por**: Persona 1 - Backend y Persistencia  
+**Desarrollado por**: 
+Persona 1 - Backend y Persistencia  
+Persona 3 – interfaz y Datos estadisticos
 **Puntos obtenidos**: 1.5 (Guardar pit stop: 1.0 + Pruebas unitarias: 0.5)  
 **Fecha**: Octubre 2024
