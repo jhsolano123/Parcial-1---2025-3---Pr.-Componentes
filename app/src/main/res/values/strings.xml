@@ -16,4 +16,9 @@
     <string name="ver_listado">Ver Listado</string>
     <string name="resumen_pit_stops">Resumen de Pit Stops</string>
     <string name="listado_pit_stops">Listado de Pit Stops</string>
+    <string name="pit_stop_delete_action">Eliminar pit stop</string>
+    <string name="pit_stop_delete_title">Confirmar eliminación</string>
+    <string name="pit_stop_delete_message">¿Deseas eliminar el pit stop de %1$s?</string>
+    <string name="pit_stop_delete_confirm">Confirmar</string>
+    <string name="pit_stop_list_empty">Aún no hay pit stops registrados.</string>
 </resources>
